@@ -26,6 +26,11 @@ module Bosh::Monitor::Plugins
     end
 
     let(:alert) { Bhm::Events::Base.create!(:alert, alert_payload(deployment: 'd', job: 'j', instance_id: 'i', severity: 1)) }
+    let(:aggregated_alert) { Bhm::Events::Base.create!(
+      :alert, alert_payload(deployment: 'mydeployment',
+                            jobs_to_instance_ids: { 'job-1': ['instance-id-1', 'instance-id-3'], 'job-2': ['instance-id-2'] },
+                            severity: 1)) }
+
 
     let(:user_authentication) do
       {}
